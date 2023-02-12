@@ -27,43 +27,41 @@
 
 .loader .loader-item-3{
     animation-delay: none !important;
-    /* animation-delay: 0.05s;
-    animation: loader2 4s infinite; */
 }
 .loader .loader-item-1,
 .loader .loader-item-5{
-    animation-delay: 0.05s;
-    animation: loader2 4s infinite;
+    animation-delay: 0.03s;
+    animation: loader2 2s infinite;
 }
 .loader .loader-item-2,
 .loader .loader-item-4{
-    animation-delay: 0.03s;
-    animation: loader 4s infinite;
+    animation-delay: 0.05s;
+    animation: loader 2s infinite;
 }
-@keyframes loader{
+@keyframes loader2{
     0%{
         transform: translateY(0px);
     }
     10%{
-        transform: translateY(-20px);
+        transform: translateY(40px);
     }
     20%{
         transform: translateY(-40px);
     }
     30%{
-        transform: translateY(-60px);
+        transform: translateY(30px);
     }
     40%{
-        transform: translateY(-80px);
+        transform: translateY(-30px);
     }
     50%{
-        transform: translateY(-60px);
+        transform: translateY(20px);
     }
     60%{
-        transform: translateY(-40px);
+        transform: translateY(-20px);
     }
     70%{
-        transform: translateY(-20px);
+        transform: translateY(10px);
     }
     80%{
         transform: translateY(-10px);
@@ -73,33 +71,33 @@
     }
     
 }
-@keyframes loader2{
+@keyframes loader{
     0%{
         transform: translateY(0px);
     }
     10%{
-        transform: translateY(-10px);
+        transform: translateY(-40px);
     }
     20%{
-        transform: translateY(-20px);
+        transform: translateY(40px);
     }
     30%{
         transform: translateY(-30px);
     }
     40%{
-        transform: translateY(-40px);
+        transform: translateY(30px);
     }
     50%{
-        transform: translateY(-30px);
+        transform: translateY(-20px);
     }
     60%{
-        transform: translateY(-20px);
+        transform: translateY(20px);
     }
     70%{
         transform: translateY(-10px);
     }
     80%{
-        transform: translateY(-5px);
+        transform: translateY(10px);
     }
     90%,100%{
         transform: translateY(0);
