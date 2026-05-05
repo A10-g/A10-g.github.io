@@ -1,446 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abhishek Gupta</title>
-
-  <!-- Remix Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet" />
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek Gupta | Backend Portfolio</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        surface: 'var(--color-surface)',
+                        'on-surface': 'var(--color-on-surface)',
+                        'surface-container': 'var(--color-surface-container)',
+                        'surface-container-high': 'var(--color-surface-container-high)',
+                        'surface-container-low': 'var(--color-surface-container-low)',
+                        'surface-container-lowest': 'var(--color-surface-container-lowest)',
+                        'outline': 'var(--color-outline)',
+                        'outline-variant': 'var(--color-outline-variant)',
+                        'primary': 'var(--color-primary)',
+                        'primary-container': 'var(--color-primary-container)',
+                        'on-primary-container': 'var(--color-on-primary-container)',
+                        'secondary': 'var(--color-secondary)',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    animation: {
+                        'morph': 'morph 8s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        morph: {
+                            '0%, 100%': { borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' },
+                            '34%': { borderRadius: '70% 30% 50% 50% / 30% 30% 70% 70%' },
+                            '67%': { borderRadius: '100% 60% 60% 100% / 100% 100% 60% 60%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        :root {
+            --color-surface: #fff8f2;
+            --color-on-surface: #201b12;
+            --color-surface-container: #f8ecdd;
+            --color-surface-container-high: #f2e7d7;
+            --color-surface-container-low: #fef2e2;
+            --color-surface-container-lowest: #ffffff;
+            --color-outline: #817661;
+            --color-outline-variant: #d3c5ad;
+            --color-primary-container: #1d4aff;
+            --color-on-primary-container: #ffffff;
+            --color-primary: #0033d3;
+            --color-secondary: #f9bd2b;
+        }
+        .dark {
+            --color-surface: #131313;
+            --color-on-surface: #e5e2e1;
+            --color-surface-container: #201f1f;
+            --color-surface-container-high: #2a2a2a;
+            --color-surface-container-low: #1c1b1b;
+            --color-surface-container-lowest: #0e0e0e;
+            --color-outline: #8e8fa3;
+            --color-outline-variant: #444656;
+            --color-primary-container: #1d4aff;
+            --color-on-primary-container: #daddff;
+            --color-primary: #bac3ff;
+            --color-secondary: #f9bd2b;
+        }
+        body { transition: background-color 0.3s, color 0.3s; }
+        .scroll-mt-20 { scroll-margin-top: 5rem; }
+    </style>
 </head>
-<body>
+<body class="bg-surface text-on-surface font-sans">
 
-  <!-- ========== HEADER ========== -->
-  <header class="header" id="header">
-    <nav class="nav container">
-      <a href="#" class="nav__logo">Abhishek</a>
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 w-full border-b border-outline-variant bg-surface/80 backdrop-blur-md">
+        <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-2">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-container text-on-primary-container font-black">AG</div>
+                <span class="text-xl font-extrabold tracking-tight">Abhishek Gupta</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 font-bold">
+                <a href="#about" class="text-sm text-outline hover:text-primary transition-colors">About</a>
+                <a href="#projects" class="text-sm text-primary border-b-2 border-primary pb-1">Experience</a>
+                <a href="#skills" class="text-sm text-outline hover:text-primary transition-colors">Skills</a>
+            </div>
 
-      <!-- Hamburger (mobile) -->
-      <div class="nav__toggle" id="nav-toggle" aria-label="Open menu">
-        <i class="ri-menu-line"></i>
-      </div>
-
-      <div class="nav__menu" id="nav-menu">
-        <!-- Close button (mobile) -->
-        <div class="nav__close" id="nav-close" aria-label="Close menu">
-          <i class="ri-close-line"></i>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleDarkMode()" class="flex h-10 w-10 items-center justify-center rounded-lg border border-outline-variant hover:border-primary-container transition-colors">
+                    <i id="theme-icon" data-lucide="sun"></i>
+                </button>
+                <a href="mailto:ag10022101@gmail.com" class="hidden sm:block rounded-lg bg-primary-container px-6 py-2 text-sm font-bold text-on-primary-container hover:opacity-90 active:scale-95 transition-all">Resume</a>
+            </div>
         </div>
-
-        <ul class="nav__list">
-          <li class="nav__item"><a href="#home"    class="nav__link active-link">Home</a></li>
-          <li class="nav__item"><a href="#about"   class="nav__link">About</a></li>
-          <li class="nav__item"><a href="#skills"  class="nav__link">Skills</a></li>
-          <li class="nav__item"><a href="#qualification" class="nav__link">Qualification</a></li>
-          <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
-          <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-        </ul>
-      </div>
     </nav>
-  </header>
 
-  <!-- ========== MAIN ========== -->
-  <main class="main">
-
-    <!-- ---- HOME ---- -->
-    <section class="home section" id="home">
-      <div class="home__container container grid">
-        <div class="home__content">
-          <div class="home__social">
-            <a href="https://github.com/a10-g" target="_blank" class="home__social-icon" aria-label="GitHub">
-              <i class="ri-github-fill"></i>
-            </a>
-            <a href="/cdn-cgi/l/email-protection#2746454f4e161e14104c67404a464e4b0944484a" class="home__social-icon" aria-label="Email">
-              <i class="ri-mail-fill"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/abhishek-gupta" target="_blank" class="home__social-icon" aria-label="LinkedIn">
-              <i class="ri-linkedin-box-fill"></i>
-            </a>
-          </div>
-
-          <div class="home__img-wrapper">
-            <img src="profile.png" alt="Abhishek Gupta" class="home__img" />
-          </div>
-
-          <div class="home__data">
-            <span class="home__greeting">Hey, I'm</span>
-            <h1 class="home__name">Abhishek<br>Gupta</h1>
-            <h3 class="home__title">Assistant System Engineer</h3>
-            <p class="home__description">
-              Backend engineer with 1+ year of experience in microservices
-              architecture, Java 8, Spring Boot, and PostgreSQL.
-            </p>
-            <div class="home__buttons">
-              <a href="#contact" class="button button--primary">Contact Me <i class="ri-arrow-right-line"></i></a>
-              <a href="#about"   class="button button--ghost">Scroll Down <i class="ri-arrow-down-line"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Stats strip -->
-        <div class="home__stats">
-          <div class="home__stat">
-            <span class="home__stat-num">01+</span>
-            <span class="home__stat-label">Years<br>Experience</span>
-          </div>
-          <div class="home__stat">
-            <span class="home__stat-num">03+</span>
-            <span class="home__stat-label">Completed<br>Projects</span>
-          </div>
-          <div class="home__stat">
-            <span class="home__stat-num">03+</span>
-            <span class="home__stat-label">Companies<br>Worked</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ---- ABOUT ---- -->
-    <section class="about section" id="about">
-      <div class="container">
-        <span class="section__subtitle">My Introduction</span>
-        <h2 class="section__title">About Me</h2>
-
-        <div class="about__container grid">
-          <div class="about__img-wrapper">
-            <img src="aboutme.jpeg" alt="Abhishek Gupta" class="about__img" />
-          </div>
-
-          <div class="about__data">
-            <p class="about__description">
-              I'm <strong>Abhishek Gupta</strong>, an Assistant System Engineer at Tata Consultancy Services.
-              With a robust background in backend development and microservices, I specialise in
-              building scalable solutions using Java, Spring Boot, and PostgreSQL. I am passionate
-              about writing clean, efficient code and continuously expanding my technical skillset.
-            </p>
-
-            <div class="about__info">
-              <div class="about__box">
-                <i class="ri-award-line about__icon"></i>
-                <span class="about__info-title">01+</span>
-                <span class="about__info-name">Years<br>Experience</span>
-              </div>
-              <div class="about__box">
-                <i class="ri-briefcase-line about__icon"></i>
-                <span class="about__info-title">03+</span>
-                <span class="about__info-name">Completed<br>Projects</span>
-              </div>
-              <div class="about__box">
-                <i class="ri-building-line about__icon"></i>
-                <span class="about__info-title">03+</span>
-                <span class="about__info-name">Companies<br>Worked</span>
-              </div>
-            </div>
-
-            <a href="#" class="button button--primary" download>
-              Download CV <i class="ri-download-2-line"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ---- SKILLS ---- -->
-    <section class="skills section" id="skills">
-      <div class="container">
-        <span class="section__subtitle">My Technical Level</span>
-        <h2 class="section__title">Skills</h2>
-
-        <div class="skills__container grid">
-
-          <!-- Backend -->
-          <div class="skills__content skills__open">
-            <div class="skills__header">
-              <i class="ri-code-s-slash-line skills__icon"></i>
-              <div>
-                <h2 class="skills__title">Backend Development</h2>
-                <span class="skills__subtitle">Core Competencies</span>
-              </div>
-              <i class="ri-arrow-down-s-line skills__arrow"></i>
-            </div>
-            <div class="skills__list">
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">Java 8</h3><span class="skills__number">90%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:90%"></span></div>
-              </div>
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">Spring Boot</h3><span class="skills__number">85%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:85%"></span></div>
-              </div>
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">REST APIs</h3><span class="skills__number">85%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:85%"></span></div>
-              </div>
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">Hibernate</h3><span class="skills__number">75%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:75%"></span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- DB & Tools -->
-          <div class="skills__content skills__close">
-            <div class="skills__header">
-              <i class="ri-database-2-line skills__icon"></i>
-              <div>
-                <h2 class="skills__title">Database &amp; Tools</h2>
-                <span class="skills__subtitle">Infrastructure</span>
-              </div>
-              <i class="ri-arrow-down-s-line skills__arrow"></i>
-            </div>
-            <div class="skills__list">
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">PostgreSQL / Oracle SQL</h3><span class="skills__number">80%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:80%"></span></div>
-              </div>
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">Git &amp; GitHub</h3><span class="skills__number">85%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:85%"></span></div>
-              </div>
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">Apache Kafka</h3><span class="skills__number">70%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:70%"></span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Concepts -->
-          <div class="skills__content skills__close">
-            <div class="skills__header">
-              <i class="ri-lightbulb-line skills__icon"></i>
-              <div>
-                <h2 class="skills__title">Concepts &amp; Others</h2>
-                <span class="skills__subtitle">Foundational</span>
-              </div>
-              <i class="ri-arrow-down-s-line skills__arrow"></i>
-            </div>
-            <div class="skills__list">
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">Data Structures &amp; Algo</h3><span class="skills__number">85%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:85%"></span></div>
-              </div>
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">Microservices</h3><span class="skills__number">80%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:80%"></span></div>
-              </div>
-              <div class="skills__data">
-                <div class="skills__titles"><h3 class="skills__name">Python</h3><span class="skills__number">80%</span></div>
-                <div class="skills__bar"><span class="skills__percentage" style="width:80%"></span></div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ---- QUALIFICATION ---- -->
-    <section class="qualification section" id="qualification">
-      <div class="container">
-        <span class="section__subtitle">My Personal Journey</span>
-        <h2 class="section__title">Qualification</h2>
-
-        <div class="qualification__container">
-          <div class="qualification__tabs">
-            <button class="qualification__button button--flex qualification__active" data-target="#education">
-              <i class="ri-graduation-cap-line qualification__icon"></i> Education
-            </button>
-            <button class="qualification__button button--flex" data-target="#work">
-              <i class="ri-briefcase-line qualification__icon"></i> Work
-            </button>
-          </div>
-
-          <div class="qualification__sections">
-            <!-- Education -->
-            <div class="qualification__content qualification__active" id="education">
-              <div class="qualification__data">
-                <div>
-                  <h3 class="qualification__title">Computer Engineering</h3>
-                  <span class="qualification__subtitle">Jayawantrao Sawant College of Engineering</span>
-                  <div class="qualification__calendar"><i class="ri-calendar-line"></i> 2020 – 2024</div>
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        <!-- Hero Section -->
+        <section class="flex flex-col items-center justify-between gap-12 py-16 md:flex-row md:py-24">
+            <div class="flex-1 flex flex-col gap-8">
+                <div class="inline-flex items-center gap-2 rounded-full border border-outline-variant bg-surface-container px-4 py-1.5 self-start">
+                    <span class="h-2 w-2 rounded-full bg-secondary animate-pulse"></span>
+                    <span class="font-mono text-xs text-outline">Assistant System Engineer @ TCS Mumbai</span>
                 </div>
-                <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-              </div>
-              <div class="qualification__data">
-                <div></div>
-                <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-                <div>
-                  <h3 class="qualification__title">HSC</h3>
-                  <span class="qualification__subtitle">Pace Junior Science College, Thane</span>
-                  <div class="qualification__calendar"><i class="ri-calendar-line"></i> 2018 – 2020</div>
+                
+                <h1 class="text-5xl font-extrabold leading-[1.1] tracking-tighter sm:text-6xl">
+                    Building scalable <br>
+                    <span class="text-primary-container">microservices for the future.</span>
+                </h1>
+                
+                <p class="max-w-xl text-lg opacity-80">
+                    I'm Abhishek Gupta, specializing in backend development. I turn complex requirements into resilient systems using Java, Spring Boot, and PostgreSQL.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="inline-flex items-center gap-2 rounded-lg bg-primary-container px-8 py-3 font-bold text-on-primary-container hover:scale-105 transition-all shadow-lg text-center">
+                        View Experience <i data-lucide="arrow-right" size="18"></i>
+                    </a>
+                    <a href="mailto:ag10022101@gmail.com" class="rounded-lg border border-primary-container px-8 py-3 font-bold text-primary hover:bg-surface-container transition-all text-center">Initiate Contact</a>
                 </div>
-              </div>
-              <div class="qualification__data">
-                <div>
-                  <h3 class="qualification__title">SSC</h3>
-                  <span class="qualification__subtitle">Lok Kalyan Public School</span>
-                  <div class="qualification__calendar"><i class="ri-calendar-line"></i> 2017 – 2018</div>
+            </div>
+
+            <div class="flex-1 flex justify-center">
+                <div class="relative aspect-square w-full max-w-sm rounded-full bg-secondary/10 p-8 border-4 border-surface-container overflow-hidden">
+                    <div class="absolute inset-0 bg-secondary/5 animate-morph"></div>
+                    <img src="https://lh3.googleusercontent.com/aida/ADBb0uikFDa45-spueajbGJir4PpdBsMaYZNFbSrzOrqrIrKl7eTCIo1qFoAbB5frPj9egkRK9uoNkEtW5-sAAbKSJYKs5oUmwQJG25-oEegEpaIh4gY0vJkwvvusxrKZ3f1yGSFIGJv9R35GnrUMcOxPJbIPtt9WENC56U1wLV5Gw4qM-syiHQCo6-u5-SHNJqW32hh0aI5uCerxrD_XJnRb2VelQ_ZSKhDHG7WQaL-N5cMpmv_egErRPiLSkd8" alt="Abhishek Mascot" class="relative z-10 h-full w-full object-contain">
                 </div>
-                <div><span class="qualification__rounder"></span></div>
-              </div>
             </div>
+        </section>
 
-            <!-- Work -->
-            <div class="qualification__content" id="work">
-              <div class="qualification__data">
+        <!-- About Section -->
+        <section id="about" class="py-20 scroll-mt-20">
+            <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
                 <div>
-                  <h3 class="qualification__title">Assistant System Engineer</h3>
-                  <span class="qualification__subtitle">Tata Consultancy Services</span>
-                  <div class="qualification__calendar"><i class="ri-calendar-line"></i> Jul 2024 – Present</div>
+                    <h2 class="text-3xl font-extrabold uppercase mb-2">About_Me{}</h2>
+                    <div class="h-1 w-20 bg-primary-container mb-8"></div>
+                    <p class="text-lg opacity-70 mb-4 leading-relaxed">
+                        I'm Abhishek Gupta, an Assistant System Engineer at TCS. With experience in microservices architecture, I specialize in Java 8, Spring Boot, and PostgreSQL.
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="rounded-lg bg-surface-container p-4 border border-outline-variant">
+                            <span class="text-2xl font-bold text-primary">1+</span>
+                            <div class="text-[10px] uppercase font-mono">Years Exp</div>
+                        </div>
+                        <div class="rounded-lg bg-surface-container p-4 border border-outline-variant">
+                            <span class="text-2xl font-bold text-primary">8+</span>
+                            <div class="text-[10px] uppercase font-mono">Tech Stack</div>
+                        </div>
+                    </div>
                 </div>
-                <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-              </div>
-              <div class="qualification__data">
-                <div></div>
-                <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
                 <div>
-                  <h3 class="qualification__title">Web Development Intern</h3>
-                  <span class="qualification__subtitle">Oasis Infobyte</span>
-                  <div class="qualification__calendar"><i class="ri-calendar-line"></i> Mar 2023</div>
+                    <h2 class="text-3xl font-extrabold uppercase mb-2">Qualification[]</h2>
+                    <div class="h-1 w-20 bg-primary-container mb-8"></div>
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl border border-outline-variant flex gap-4 items-center">
+                            <i data-lucide="graduation-cap" class="text-primary"></i>
+                            <div><h4 class="font-bold">Computer Engineering</h4><p class="text-xs opacity-60">Graduate Degree</p></div>
+                        </div>
+                        <div class="p-4 rounded-xl border border-outline-variant flex gap-4 items-center">
+                            <i data-lucide="briefcase" class="text-primary"></i>
+                            <div><h4 class="font-bold">Assistant System Engineer</h4><p class="text-xs opacity-60">TCS Mumbai</p></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="qualification__data">
-                <div>
-                  <h3 class="qualification__title">Intern</h3>
-                  <span class="qualification__subtitle">Vodafone Idea</span>
-                  <div class="qualification__calendar"><i class="ri-calendar-line"></i> Aug – Sep 2022</div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="projects" class="py-20 scroll-mt-20">
+            <h2 class="text-3xl font-extrabold uppercase mb-2">Experience_&_Projects()</h2>
+            <div class="h-1 w-20 bg-primary-container mb-12"></div>
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                <div class="group p-6 rounded-xl border border-outline-variant bg-surface-container hover:shadow-lg transition-all">
+                    <div class="flex justify-between mb-4"><span class="bg-surface-variant px-2 py-1 text-[10px] font-mono uppercase">Professional</span><i data-lucide="server" size="18"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Backend Engineering @ TCS</h3>
+                    <p class="text-sm opacity-70 mb-4">Scalable microservices focused on performance optimization.</p>
+                    <div class="border-t border-dashed border-outline-variant pt-4 text-[10px] font-mono text-secondary">ROLE: Engineer</div>
                 </div>
-                <div><span class="qualification__rounder"></span></div>
-              </div>
+                <div class="group p-6 rounded-xl border border-outline-variant bg-surface-container hover:shadow-lg transition-all">
+                    <div class="flex justify-between mb-4"><span class="bg-surface-variant px-2 py-1 text-[10px] font-mono uppercase">Product</span><i data-lucide="layout" size="18"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Smart Society App</h3>
+                    <p class="text-sm opacity-70 mb-4">Management system with distributed architecture and Panic Alert system.</p>
+                    <div class="border-t border-dashed border-outline-variant pt-4 text-[10px] font-mono text-primary">FEATURE: Panic Alert</div>
+                </div>
+                <div class="group p-6 rounded-xl border border-outline-variant bg-surface-container hover:shadow-lg transition-all">
+                    <div class="flex justify-between mb-4"><span class="bg-surface-variant px-2 py-1 text-[10px] font-mono uppercase">Full-Stack</span><i data-lucide="database" size="18"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Grocery Ordering</h3>
+                    <p class="text-sm opacity-70 mb-4">Java application using Apache Derby database and MVC patterns.</p>
+                    <div class="border-t border-dashed border-outline-variant pt-4 text-[10px] font-mono text-secondary">UX: Role-Based</div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- ---- PROJECTS ---- -->
-    <section class="projects section" id="projects">
-      <div class="container">
-        <span class="section__subtitle">What I've Built</span>
-        <h2 class="section__title">Projects</h2>
-
-        <div class="projects__container grid">
-
-          <article class="project__card">
-            <div class="project__tag">Backend</div>
-            <h3 class="project__title">Backend Engineering @ TCS</h3>
-            <p class="project__description">
-              Designed and implemented scalable microservices and backend solutions. Focused on
-              performance optimisation and robust API development.
-            </p>
-            <div class="project__stack">
-              <span>Java 8</span><span>Spring Boot</span><span>PostgreSQL</span><span>Kafka</span>
+        <!-- Skills Console -->
+        <section id="skills" class="py-20 scroll-mt-20">
+            <h2 class="text-3xl font-extrabold uppercase mb-2">Technical_Arsenal[]</h2>
+            <div class="h-1 w-20 bg-primary-container mb-12"></div>
+            <div class="border border-outline-variant rounded-xl overflow-hidden bg-surface-container">
+                <div class="divide-y divide-outline-variant">
+                    <div class="flex p-4 justify-between items-center bg-surface-container-high transition-colors">
+                        <span class="font-bold">Java 8</span><span class="text-xs font-mono opacity-50 uppercase">Backend Core</span>
+                    </div>
+                    <div class="flex p-4 justify-between items-center bg-surface-container-high transition-colors">
+                        <span class="font-bold">Spring Boot</span><span class="text-xs font-mono opacity-50 uppercase">Microservices</span>
+                    </div>
+                    <div class="flex p-4 justify-between items-center bg-surface-container-high transition-colors">
+                        <span class="font-bold">Apache Kafka</span><span class="text-xs font-mono opacity-50 uppercase">Event Arch</span>
+                    </div>
+                    <div class="flex p-4 justify-between items-center bg-surface-container-high transition-colors">
+                        <span class="font-bold">PostgreSQL</span><span class="text-xs font-mono opacity-50 uppercase">Relational DB</span>
+                    </div>
+                </div>
             </div>
-            <a href="https://www.tcs.com/" target="_blank" class="project__link">
-              View Company <i class="ri-external-link-line"></i>
-            </a>
-          </article>
+        </section>
 
-          <article class="project__card">
-            <div class="project__tag">Mobile</div>
-            <h3 class="project__title">Smart Society App</h3>
-            <p class="project__description">
-              A comprehensive society management application designed to streamline daily operations.
-              Features separate UIs for different user roles and a Panic Alert system.
-            </p>
-            <div class="project__stack">
-              <span>Java</span><span>Android Studio</span><span>Figma</span>
+        <!-- Contact CTA -->
+        <section id="contact" class="py-20">
+            <div class="rounded-3xl bg-primary-container p-12 text-center text-white border-2 border-white/10 shadow-2xl">
+                <h2 class="text-4xl font-extrabold mb-6 tracking-tighter">Ready to optimize your systems?</h2>
+                <a href="mailto:ag10022101@gmail.com" class="inline-block bg-white text-primary-container px-10 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-all">Write Me An Email</a>
             </div>
-            <a href="#" class="project__link">
-              View Details <i class="ri-arrow-right-line"></i>
-            </a>
-          </article>
+        </section>
+    </main>
 
-          <article class="project__card">
-            <div class="project__tag">Full-Stack</div>
-            <h3 class="project__title">Online Grocery Ordering</h3>
-            <p class="project__description">
-              A full-stack web application for grocery shopping with a focus on separation of concerns.
-              Implements user management using Apache Derby Database.
-            </p>
-            <div class="project__stack">
-              <span>Java</span><span>JSP/Servlets</span><span>SQL</span>
-            </div>
-            <a href="#" class="project__link">
-              View Details <i class="ri-arrow-right-line"></i>
-            </a>
-          </article>
+    <footer class="border-t border-outline-variant bg-surface-container-lowest py-16 text-center">
+        <h3 class="text-2xl font-black mb-2">Abhishek Gupta</h3>
+        <p class="text-xs font-mono opacity-50">© 2024 Abhishek Gupta • Crafted for Performance.</p>
+    </footer>
 
-        </div>
-      </div>
-    </section>
+    <script>
+        // Init Icons
+        lucide.createIcons();
 
-    <!-- ---- CONTACT ---- -->
-    <section class="contact section" id="contact">
-      <div class="container">
-        <span class="section__subtitle">Get In Touch</span>
-        <h2 class="section__title">Contact Me</h2>
-
-        <div class="contact__container grid">
-          <div class="contact__info">
-            <div class="contact__card">
-              <i class="ri-mail-line contact__card-icon"></i>
-              <h3 class="contact__card-title">Email</h3>
-              <span class="contact__card-data"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5736353f3e666e64603c17303a363e3b7934383a">[email&#160;protected]</a></span>
-              <a href="/cdn-cgi/l/email-protection#29484b414018101a1e42694e44484045074a4644" class="contact__button">
-                Write me <i class="ri-arrow-right-line contact__button-icon"></i>
-              </a>
-            </div>
-            <div class="contact__card">
-              <i class="ri-map-pin-line contact__card-icon"></i>
-              <h3 class="contact__card-title">Location</h3>
-              <span class="contact__card-data">Mumbai, India</span>
-              <a href="https://maps.google.com/?q=Mumbai,India" target="_blank" class="contact__button">
-                View on map <i class="ri-arrow-right-line contact__button-icon"></i>
-              </a>
-            </div>
-          </div>
-
-          <form class="contact__form" id="contact-form">
-            <div class="contact__form-div">
-              <label class="contact__form-tag" for="name">Name</label>
-              <input id="name" class="contact__form-input" type="text" placeholder="Your name" required />
-            </div>
-            <div class="contact__form-div">
-              <label class="contact__form-tag" for="email">Email</label>
-              <input id="email" class="contact__form-input" type="email" placeholder="Your email" required />
-            </div>
-            <div class="contact__form-div contact__form-area">
-              <label class="contact__form-tag" for="message">Message</label>
-              <textarea id="message" class="contact__form-input" cols="30" rows="10" placeholder="Write your message here..." required></textarea>
-            </div>
-            <button type="submit" class="button button--primary">
-              Send Message <i class="ri-send-plane-line"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="footer__container container">
-      <h1 class="footer__title">Abhishek</h1>
-      <p class="footer__subtitle">Assistant System Engineer</p>
-      <ul class="footer__social">
-        <li><a href="https://github.com/a10-g" target="_blank" class="footer__social-link" aria-label="GitHub"><i class="ri-github-fill"></i></a></li>
-        <li><a href="/cdn-cgi/l/email-protection#ef8e8d8786ded6dcd884af88828e8683c18c8082" class="footer__social-link" aria-label="Email"><i class="ri-mail-fill"></i></a></li>
-        <li><a href="#" target="_blank" class="footer__social-link" aria-label="LinkedIn"><i class="ri-linkedin-box-fill"></i></a></li>
-      </ul>
-      <p class="footer__copy">&copy; Abhishek. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- Scroll-to-top -->
-  <a href="#" class="scrollup" id="scroll-up" aria-label="Scroll to top">
-    <i class="ri-arrow-up-line"></i>
-  </a>
-
-  <script src="js/main.js"></script>
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.setAttribute('data-lucide', 'moon');
+            } else {
+                html.classList.add('dark');
+                icon.setAttribute('data-lucide', 'sun');
+            }
+            lucide.createIcons();
+        }
+    </script>
 </body>
 </html>
